@@ -13,11 +13,15 @@ function App() {
 	const [st5, setSt5] = useState();
 	const [st6, setSt6] = useState();
 	const [st7, setSt7] = useState();
+	const [st8, setSt8] = useState('');
+	const [st9, setSt9] = useState();
+	const [st10, setSt10] = useState([]);
 	//refs
 	let inp1 = React.createRef();
-	//vars
-	let numTaks2 = 0;
-
+	let inp10 = React.createRef();
+	//var
+	let ar10 = [];
+	let out = ''
 
   function task1() {
 		setSt1(inp1.current.value);
@@ -28,7 +32,7 @@ function App() {
 		setSt2(count);
   }
   function task3(e) {
-	  setSt3(e.target.value)
+	  setSt3(e.target.value);
   }
   function task4() {
 	   let count = st4;
@@ -51,7 +55,7 @@ function App() {
 		 g = randomInt(0, 255),
 		 b = randomInt(0, 255);
 
-	setSt7('background-color: rgb(1,2,3)')
+	setSt7(`rgb(${r}, ${g}, ${b})`)
 
 	function randomInt(min, max) {
 		min = Math.ceil(min);
@@ -59,14 +63,30 @@ function App() {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	 }
   }
-  function task8() {
+  function task8(e) {
 
+	let out = st8;
+	if (isNaN(e.key-1)) {
+		out+='0';
+		setSt8(out);
+	} else {
+		out+='1'
+		setSt8(out);
+	}
   }
-  function task9() {
+  function task9(e) {
+	setSt9(e.target.value)
+  }
 
-  }
   function task10() {
-
+	  	ar10 = st10;
+		ar10.push(inp10.current.value)
+		console.log(ar10)
+		setSt10(ar10)
+		console.log('st10', st10)
+		setSt10.forEach(e => {
+			out.innetHTML =+ e + ' '
+		});
   }
 
   return (
@@ -116,29 +136,29 @@ function App() {
 
      <section>
         <h2>Task 7</h2>
-        <div className="block-7"></div>
+        <div style={{backgroundColor: st7}} className="block-7"></div>
         <button onClick={task7} className="task-7">Color</button>
-        <div style={st7}></div>
+        <div>{st7}</div>
       </section>
 
-   {/*    <section>
+       <section>
         <h2>Task 8</h2>
-        <input type="text" className="task-8"></input>
+        <input onKeyPress={task8} type="text" className="task-8"></input>
         <div>{st8}</div>
       </section>
 
       <section>
         <h2>Task 9</h2>
-        <input type="range" className="task-9"></input>
+        <input onInput = {task9} type="range" className="task-9"></input>
         <div>{st9}</div>
       </section>
 
-      <section>
+		 <section>
         <h2>Task 10</h2>
-        <input type="number" className="i-10"></input>
-        <button className="task-10">Push</button>
-        <div>Тут выводим - форма вывода любая!</div>
-      </section> */}
+        <input type="number" className="i-10" ref={inp10}></input>
+        <button onClick={task10} className="task-10">Push</button>
+        <div>{out}</div>
+      </section>
     </>
   );
 }
