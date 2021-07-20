@@ -20,8 +20,7 @@ function App() {
 	let inp1 = React.createRef();
 	let inp10 = React.createRef();
 	//var
-	let ar10 = [];
-	let out = ''
+	let out = '';
 
   function task1() {
 		setSt1(inp1.current.value);
@@ -79,14 +78,10 @@ function App() {
   }
 
   function task10() {
-	  	ar10 = st10;
-		ar10.push(inp10.current.value)
-		console.log(ar10)
-		setSt10(ar10)
-		console.log('st10', st10)
-		setSt10.forEach(e => {
-			out.innetHTML =+ e + ' '
-		});
+		let inp10Value = inp10.current.value;
+		let arr10 = [...st10, inp10Value];
+		setSt10(arr10);
+		inp10.current.value='';
   }
 
   return (
@@ -157,7 +152,7 @@ function App() {
         <h2>Task 10</h2>
         <input type="number" className="i-10" ref={inp10}></input>
         <button onClick={task10} className="task-10">Push</button>
-        <div>{out}</div>
+        <div>{st10.map((item) => <div>{item}</div>)}</div>
       </section>
     </>
   );
